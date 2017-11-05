@@ -38,4 +38,9 @@ This file is ignored by Git.
   * Flash Size: 4M (3M SPIFFS)
   * Upload Speed: 115200
   * Port: 
-3. Compole and Upload Sketch
+3. Compile and Upload Sketch
+
+## Sources
+ 
+* https://learn.adafruit.com/esp8266-temperature-slash-humidity-webserver/code
+* https://learn.adafruit.com/home-automation-in-the-cloud-with-the-esp8266-and-adafruit-io/programming-the-modules?view=all#hardware-and-software-requirements
