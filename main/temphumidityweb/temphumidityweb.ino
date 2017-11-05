@@ -10,7 +10,7 @@
 #include <DHT.h>
 #include "secrets.h"
 #define DHTTYPE DHT22
-#define DHTPIN  2
+#define DHTPIN  D2
 
 // Use these if not using a secrets.h file 
 // const char* ssid     = "YourRouterID";
