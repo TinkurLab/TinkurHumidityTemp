@@ -15,7 +15,7 @@ Project to measuring humidity and temperature using an ESP82666MOD and DHT22 sen
 
 ### Setup Secrets
 
-Create a 'secrets.h' file in the Sketch's root director with the following contents:
+Create a 'secrets.h' file in the Sketch's root directory (ex. /main/temphumidityadafruitio/) with the following contents:
 
 ~~~
 #define WLAN_SSID       "WiFiSSID"
