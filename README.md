@@ -4,6 +4,13 @@
 
 Project to measuring humidity and temperature using an ESP82666MOD and DHT22 sensor.
 
+## Hardware
+
+* HiLetgo ESP8266 NodeMCU https://www.amazon.com/gp/product/B010O1G1ES/
+* DHT22 Humidity + Temp Sensor https://www.adafruit.com/product/385
+* 10K resistor 
+* power supply, usb cable, hookup supplies
+
 ## Setup
 
 ### Setup Secrets
@@ -25,8 +32,10 @@ This file is ignored by Git.
 ### Setup Ardunino IDE
 
 1. Download and install any Ardunio libraries as needed.
-2. Setup Arduino IDE for ESP8266:
-  * sdf
-  * asdf
-  * asdf
-3. 
+2. Setup Arduino IDE under Tools menu:
+  * Board: NodeMCU 1.0 (ESP=12E Module)
+  * CPU Frequency: 80MHz
+  * Flash Size: 4M (3M SPIFFS)
+  * Upload Speed: 115200
+  * Port: 
+3. Compole and Upload Sketch
