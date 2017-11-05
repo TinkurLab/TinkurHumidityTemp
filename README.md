@@ -8,11 +8,16 @@ Project to measuring humidity and temperature using an ESP82666MOD and DHT22 sen
 
 ### Setup Secrets
 
-Create a 'secrets.h' file in the '/main/temphumidityweb/' directory with the following contents:
+Create a 'secrets.h' file in the Sketch's root director with the following contents:
 
 ~~~
-const char* ssid     = "WiFiSSID";
-const char* password = "WiFiPassword";
+#define WLAN_SSID       "WiFiSSID"
+#define WLAN_PASS       "WiFiPassword"
+
+#define AIO_SERVER      "io.adafruit.com"
+#define AIO_SERVERPORT  1883
+#define AIO_USERNAME    "AdafruitIOUsername"
+#define AIO_KEY         "AdafruitIOKey"
 ~~~
 
 This file is ignored by Git.
