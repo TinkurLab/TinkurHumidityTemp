@@ -32,6 +32,7 @@ This file is ignored by Git.
 ### Setup Ardunino IDE
 
 1. Download and install any Ardunio libraries as needed.
+1. Setup Arduino IDE for ESP8266 (tutorial https://learn.adafruit.com/adafruit-huzzah-esp8266-breakout/using-arduino-ide)
 2. Setup Arduino IDE under Tools menu:
   * Board: NodeMCU 1.0 (ESP=12E Module)
   * CPU Frequency: 80MHz
