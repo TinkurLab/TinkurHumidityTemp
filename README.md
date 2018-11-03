@@ -9,7 +9,7 @@ Adapted from Adafruit [tutorial and code for ESP8266 Temperature / Humidity Webs
 ## Hardware
 
 * [HiLetgo ESP8266 NodeMCU](https://www.amazon.com/gp/product/B010O1G1ES/)
-* [HiLetgo DHT22 Humidity + Temp with breakout board])https://www.amazon.com/gp/product/B0795F19W6/) (note: if using a DHT22 without a breakout board, you'll need a 10k resistor; [more info](https://learn.adafruit.com/esp8266-temperature-slash-humidity-webserver/wiring))
+* [HiLetgo DHT22 Humidity + Temp with breakout board](https://www.amazon.com/gp/product/B0795F19W6/) (note: if using a DHT22 without a breakout board, you'll need a 10k resistor; [more info](https://learn.adafruit.com/esp8266-temperature-slash-humidity-webserver/wiring))
 * power supply, usb cable, hookup supplies
 
 ## Setup
