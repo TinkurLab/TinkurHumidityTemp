@@ -36,15 +36,15 @@ Create a 'secrets.h' file in the Sketch's root directory (ex. /main/temphumidity
 #define AIO_KEY         "AdafruitIOKey"
 ~~~
 
-This file is ignored by Git.
+The 'secrets.h' file is ignored by Git.
 
 6. [Install support](https://learn.adafruit.com/add-boards-arduino-v164/) for NodeMCU boards in the Arduino IDE.
 
 7. Download and install Arduino libraries needed by this project.
 
-https://github.com/adafruit/DHT-sensor-library
-https://github.com/adafruit/Adafruit_Sensor
-https://github.com/adafruit/Adafruit_MQTT_Library
+* https://github.com/adafruit/DHT-sensor-library
+* https://github.com/adafruit/Adafruit_Sensor
+* https://github.com/adafruit/Adafruit_MQTT_Library
 
 See [Arduino IDE library tutorial](https://learn.adafruit.com/adafruit-all-about-arduino-libraries-install-use/arduino-libraries) if needed.
 
