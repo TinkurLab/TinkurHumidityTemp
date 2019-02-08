@@ -8,9 +8,9 @@ Adapted from Adafruit [tutorial and code for ESP8266 Temperature / Humidity Webs
 
 ## Hardware
 
-* [HiLetgo ESP8266 NodeMCU](https://www.amazon.com/gp/product/B010O1G1ES/)
-* [HiLetgo DHT22 Humidity + Temp with breakout board](https://www.amazon.com/gp/product/B0795F19W6/) (note: if using a DHT22 without a breakout board, you'll need a 10k resistor; [more info](https://learn.adafruit.com/esp8266-temperature-slash-humidity-webserver/wiring))
-* power supply, usb cable, hookup supplies
+- [HiLetgo ESP8266 NodeMCU](https://www.amazon.com/gp/product/B010O1G1ES/)
+- [HiLetgo DHT22 Humidity + Temp with breakout board](https://www.amazon.com/gp/product/B0795F19W6/) (note: if using a DHT22 without a breakout board, you'll need a 10k resistor; [more info](https://learn.adafruit.com/esp8266-temperature-slash-humidity-webserver/wiring))
+- power supply, usb cable, hookup supplies
 
 ## Setup
 
@@ -26,15 +26,17 @@ Adapted from Adafruit [tutorial and code for ESP8266 Temperature / Humidity Webs
 
 Create a 'secrets.h' file in the Sketch's root directory (ex. /main/temphumidityadafruitio/) with the following contents:
 
-~~~
+```
 #define WLAN_SSID       "WiFiSSID"
 #define WLAN_PASS       "WiFiPassword"
 
+#define AIO_HUM_FEED   "/feeds/humidity2"
+#define AIO_TEMP_FEED  "/feeds/temperature2"
 #define AIO_SERVER      "io.adafruit.com"
 #define AIO_SERVERPORT  1883
 #define AIO_USERNAME    "AdafruitIOUsername"
 #define AIO_KEY         "AdafruitIOKey"
-~~~
+```
 
 The 'secrets.h' file is ignored by Git.
 
@@ -42,23 +44,25 @@ The 'secrets.h' file is ignored by Git.
 
 7. Download and install Arduino libraries needed by this project.
 
-* https://github.com/adafruit/DHT-sensor-library
-* https://github.com/adafruit/Adafruit_Sensor
-* https://github.com/adafruit/Adafruit_MQTT_Library
+- https://github.com/adafruit/DHT-sensor-library
+- https://github.com/adafruit/Adafruit_Sensor
+- https://github.com/adafruit/Adafruit_MQTT_Library
 
 See [Arduino IDE library tutorial](https://learn.adafruit.com/adafruit-all-about-arduino-libraries-install-use/arduino-libraries) if needed.
 
 8. Setup Arduino IDE under Tools menu:
-  * Board: NodeMCU 1.0 (ESP=12E Module)
-  * CPU Frequency: 80MHz
-  * Flash Size: 4M (3M SPIFFS)
-  * Upload Speed: 115200
-  * Port: SLAB_USBtoUART (or similar)
+
+- Board: NodeMCU 1.0 (ESP=12E Module)
+- CPU Frequency: 80MHz
+- Flash Size: 4M (3M SPIFFS)
+- Upload Speed: 115200
+- Port: SLAB_USBtoUART (or similar)
 
 9. Wire NodeMCU and DHT22:
-* DHT22 "-" to NodeMCU "GND"
-* DHT22 "+" to NodeMCU "3.3v"
-* DHT22 "out" to NodeMCU "D2"
+
+- DHT22 "-" to NodeMCU "GND"
+- DHT22 "+" to NodeMCU "3.3v"
+- DHT22 "out" to NodeMCU "D2"
 
 10. Compile and Upload Sketch in Arduino IDE
 
