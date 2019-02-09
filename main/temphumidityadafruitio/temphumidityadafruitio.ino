@@ -75,6 +75,10 @@ void setup() {
   Serial.println("WiFi connected");
   Serial.println("IP address: "); Serial.println(WiFi.localIP());
 
+  Serial.println("Feed IDs");
+  Serial.println(AIO_HUM_FEED);
+  Serial.println(AIO_TEMP_FEED);
+  Serial.println();
 }
 
 uint32_t x=0;
@@ -88,7 +92,7 @@ void loop() {
   // this is our 'wait for incoming subscription packets' busy subloop
   // try to spend your time here
 
-  delay(10000);
+  delay(60000);  //update 1x a minutes
 
   // Grab the current state of the sensor
   int humidity_data = (int)dht.readHumidity(); // percent
