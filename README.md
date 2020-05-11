@@ -30,8 +30,9 @@ Create a 'secrets.h' file in the Sketch's root directory (ex. /main/temphumidity
 #define WLAN_SSID       "WiFiSSID"
 #define WLAN_PASS       "WiFiPassword"
 
-#define AIO_HUM_FEED   "/feeds/humidity-garage"
-#define AIO_TEMP_FEED  "/feeds/temperature-garage"
+#define AIO_HUM_FEED   "/feeds/garage-humidity"
+#define AIO_TEMP_FEED  "/feeds/garage-temperature"
+#define AIO_MOISTURE_FEED  "/feeds/garage-moisture"
 #define AIO_SERVER      "io.adafruit.com"
 #define AIO_SERVERPORT  1883
 #define AIO_USERNAME    "AdafruitIOUsername"
