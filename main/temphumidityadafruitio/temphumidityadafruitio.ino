@@ -28,6 +28,11 @@
 // DHT sensor
 DHT dht(DHTPIN, DHTTYPE, 15);
 
+//Soil Moisture sensor
+int val = 0; //value for storing moisture value 
+int soilPin = A0;//Declare a variable for the soil moisture sensor 
+int soilPower = D3;//Variable for Soil moisture Power
+
 /************ Global State (you don't need to change this!) ******************/
 
 // Create an ESP8266 WiFiClient class to connect to the MQTT server.
@@ -44,6 +49,8 @@ Adafruit_MQTT_Client mqtt(&client, AIO_SERVER, AIO_SERVERPORT, AIO_USERNAME, AIO
 // Notice MQTT paths for AIO follow the form: <username>/feeds/<feedname>
 Adafruit_MQTT_Publish humidity = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME AIO_HUM_FEED);
 Adafruit_MQTT_Publish temperature = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME AIO_TEMP_FEED);
+Adafruit_MQTT_Publish moisture = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME AIO_MOISTURE_FEED);
+
 
 /*************************** Sketch Code ************************************/
 
@@ -78,6 +85,7 @@ void setup() {
   Serial.println("Feed IDs");
   Serial.println(AIO_HUM_FEED);
   Serial.println(AIO_TEMP_FEED);
+  Serial.println(AIO_MOISTURE_FEED);
   Serial.println();
 }
 
@@ -92,15 +100,16 @@ void loop() {
   // this is our 'wait for incoming subscription packets' busy subloop
   // try to spend your time here
 
-  delay(60000);  //update 1x a minutes
+  delay(10000);  //update 1x a minutes
 
   // Grab the current state of the sensor
   int humidity_data = (int)dht.readHumidity(); // percent
   int temperature_data = (int)dht.readTemperature(); // degrees C
+  int moisture_data = readSoil(); // analog range 0 to 1024
 
   temperature_data = (temperature_data * 9.0)/ 5.0 + 32.0; // convert to degrees F
 
-  // Now we can publish stuff!
+  // Publish humidity to Adafruit IO
   Serial.print(F("\nSending humidity val "));
   Serial.print(humidity_data);
   Serial.print("...");
@@ -110,11 +119,21 @@ void loop() {
     Serial.println(F("OK!"));
   }
 
-  // Now we can publish stuff!
+  // Publish temperature to Adafruit IO
   Serial.print(F("\nSending temperature val "));
   Serial.print(temperature_data);
   Serial.print("...");
   if (! temperature.publish(temperature_data)) {
+    Serial.println(F("Failed"));
+  } else {
+    Serial.println(F("OK!"));
+  }
+
+  // Publish soil moisture to Adafruit IO
+  Serial.print(F("\nSending soil moisture val "));
+  Serial.print(moisture_data);
+  Serial.print("...");
+  if (! moisture.publish(moisture_data)) {
     Serial.println(F("Failed"));
   } else {
     Serial.println(F("OK!"));
@@ -154,4 +173,15 @@ void MQTT_connect() {
        }
   }
   Serial.println("MQTT Connected!");
+}
+
+//This is a function used to get the soil moisture content
+int readSoil()
+{
+
+    digitalWrite(soilPower, HIGH);//turn D7 "On"
+    delay(10);//wait 10 milliseconds 
+    val = analogRead(soilPin);//Read the SIG value form sensor 
+    digitalWrite(soilPower, LOW);//turn D7 "Off"
+    return val;//send current moisture value
 }
