@@ -28,11 +28,6 @@
 // DHT sensor
 DHT dht(DHTPIN, DHTTYPE, 15);
 
-//Soil Moisture sensor
-int val = 0; //value for storing moisture value 
-int soilPin = A0;//Declare a variable for the soil moisture sensor 
-int soilPower = D3;//Variable for Soil moisture Power
-
 /************ Global State (you don't need to change this!) ******************/
 
 // Create an ESP8266 WiFiClient class to connect to the MQTT server.
@@ -49,7 +44,7 @@ Adafruit_MQTT_Client mqtt(&client, AIO_SERVER, AIO_SERVERPORT, AIO_USERNAME, AIO
 // Notice MQTT paths for AIO follow the form: <username>/feeds/<feedname>
 Adafruit_MQTT_Publish humidity = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME AIO_HUM_FEED);
 Adafruit_MQTT_Publish temperature = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME AIO_TEMP_FEED);
-Adafruit_MQTT_Publish moisture = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME AIO_MOISTURE_FEED);
+Adafruit_MQTT_Publish voltage = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME AIO_VOLTAGE_FEED);
 
 
 /*************************** Sketch Code ************************************/
@@ -57,6 +52,10 @@ Adafruit_MQTT_Publish moisture = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME AIO_M
 // Bug workaround for Arduino 1.6.6, it seems to need a function declaration
 // for some reason (only affects ESP8266, likely an arduino-builder bug).
 void MQTT_connect();
+
+// Variables for battery voltage
+int BAT= A0;              //Analog channel A0 as used to measure battery voltage
+float RatioFactor=5.714;  //Resistors Ration Factor
 
 void setup() {
   // Init DHT22 sensor
@@ -85,7 +84,7 @@ void setup() {
   Serial.println("Feed IDs");
   Serial.println(AIO_HUM_FEED);
   Serial.println(AIO_TEMP_FEED);
-  Serial.println(AIO_MOISTURE_FEED);
+  Serial.println(AIO_VOLTAGE_FEED);
   Serial.println();
 }
 
@@ -100,14 +99,26 @@ void loop() {
   // this is our 'wait for incoming subscription packets' busy subloop
   // try to spend your time here
 
-  delay(60000);  //update 1x a minute
-
   // Grab the current state of the sensor
   int humidity_data = (int)dht.readHumidity(); // percent
   int temperature_data = (int)dht.readTemperature(); // degrees C
-  int moisture_data = readSoil(); // analog range 0 to 1024
 
   temperature_data = (temperature_data * 9.0)/ 5.0 + 32.0; // convert to degrees F
+
+  int value = LOW;
+  float Tvoltage=0.0;
+  float Vvalue=0.0,Rvalue=0.0;
+
+  // Get battery voltage 
+  for(unsigned int i=0;i<10;i++){
+  Vvalue=Vvalue+analogRead(BAT);         //Read analog Voltage
+  delay(5);                              //ADC stable
+  }
+  Vvalue=(float)Vvalue/10.0;            //Find average of 10 values
+  Rvalue=(float)(Vvalue/1024.0)*5;      //Convert Voltage in 5v factor
+  Tvoltage=Rvalue*RatioFactor;          //Find original voltage by multiplying with factor
+  
+  value = HIGH;
 
   // Publish humidity to Adafruit IO
   Serial.print(F("\nSending humidity val "));
@@ -129,11 +140,11 @@ void loop() {
     Serial.println(F("OK!"));
   }
 
-  // Publish soil moisture to Adafruit IO
-  Serial.print(F("\nSending soil moisture val "));
-  Serial.print(moisture_data);
+  // Publish voltage to Adafruit IO
+  Serial.print(F("\nSending voltage val "));
+  Serial.print(Tvoltage);
   Serial.print("...");
-  if (! moisture.publish(moisture_data)) {
+  if (! voltage.publish(Tvoltage)) {
     Serial.println(F("Failed"));
   } else {
     Serial.println(F("OK!"));
@@ -146,6 +157,8 @@ void loop() {
     mqtt.disconnect();
   }
   */
+
+  delay(60000);  //update 1x a minute = 60000
 }
 
 // Function to connect and reconnect as necessary to the MQTT server.
@@ -173,15 +186,4 @@ void MQTT_connect() {
        }
   }
   Serial.println("MQTT Connected!");
-}
-
-//This is a function used to get the soil moisture content
-int readSoil()
-{
-
-    digitalWrite(soilPower, HIGH);//turn D7 "On"
-    delay(10);//wait 10 milliseconds 
-    val = analogRead(soilPin);//Read the SIG value form sensor 
-    digitalWrite(soilPower, LOW);//turn D7 "Off"
-    return val;//send current moisture value
 }

@@ -2,15 +2,24 @@
 
 ## Overview
 
-Project to measuring humidity and temperature using an HiLetgo ESP8266 NodeMCU and HiLetgo DHT22 sensor and send date to [Adafruit IO](https://io.adafruit.com/) to create a visual dashboard.
+Project for measuring humidity and temperature using an HiLetgo ESP8266 NodeMCU and HiLetgo DHT22 sensor and send date to [Adafruit IO](https://io.adafruit.com/) to create a visual dashboard.
 
-Adapted from Adafruit [tutorial and code for ESP8266 Temperature / Humidity Webserver](https://learn.adafruit.com/esp8266-temperature-slash-humidity-webserver/wiring).
+Adapted from:
+
+- Adafruit [tutorial and code for ESP8266 Temperature / Humidity Webserver](https://learn.adafruit.com/esp8266-temperature-slash-humidity-webserver/wiring).
+- [Tutorial for measuring 12v battery voltage using an ESP8266](https://www.engineersgarage.com/nodemcu-battery-voltage-monitor/)
 
 ## Hardware
 
 - [HiLetgo ESP8266 NodeMCU](https://www.amazon.com/gp/product/B010O1G1ES/)
 - [HiLetgo DHT22 Humidity + Temp with breakout board](https://www.amazon.com/gp/product/B0795F19W6/) or AM2302 or DHT22 (note: if using a DHT22 without a breakout board, you'll need a 10k resistor [more info](https://learn.adafruit.com/esp8266-temperature-slash-humidity-webserver/wiring))
 - power supply, usb cable, hookup supplies
+
+## Wiring
+
+See [Fritzing](https://fritzing.org/) design in `/fritzing` directory.
+
+![This is an image](fritzing/design_screenshot_20221008.jpg)
 
 ## Setup
 
@@ -45,6 +54,7 @@ The 'secrets.h' file is ignored by Git.
 
 7. Download and install Arduino libraries needed by this project.
 
+- Install ESP8266 [custom boards](https://arduino-esp8266.readthedocs.io/en/latest/installing.html)
 - https://github.com/adafruit/DHT-sensor-library
 - https://github.com/adafruit/Adafruit_Sensor
 - https://github.com/adafruit/Adafruit_MQTT_Library
@@ -65,6 +75,12 @@ See [Arduino IDE library tutorial](https://learn.adafruit.com/adafruit-all-about
 - DHT22 "+" to NodeMCU "3.3v"
 - DHT22 "out" to NodeMCU "D2"
 
-10. Compile and Upload Sketch in Arduino IDE
+10. Plug in the board via USB via the Apple USB A to C adapter (don't use a USB hub)
 
-11. Use Arduino IDE Termainl to debug
+11. Compile and Upload Sketch in Arduino IDE
+
+12. Use Arduino IDE terminal to debug at 115200 baud
+
+## Resources
+
+- [ESP8266 Pinouts](https://randomnerdtutorials.com/esp8266-pinout-reference-gpios/)
