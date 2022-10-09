@@ -11,8 +11,8 @@ Adapted from:
 
 ## TODO
 
-[ ] Try 47k resistor vs 27k to lower max voltage enough and work with this math
-[ ] Try 3.2v factor vs 5v factor since the board runs at 3.x volts
+- [ ] Try 47k resistor vs 27k to lower max voltage enough and work with this math
+- [ ] Try 3.2v factor vs 5v factor since the board runs at 3.x volts
 
 ## Hardware
 
