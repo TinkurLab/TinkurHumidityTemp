@@ -7,7 +7,12 @@ Project for measuring humidity and temperature using an HiLetgo ESP8266 NodeMCU 
 Adapted from:
 
 - Adafruit [tutorial and code for ESP8266 Temperature / Humidity Webserver](https://learn.adafruit.com/esp8266-temperature-slash-humidity-webserver/wiring).
-- [Tutorial for measuring 12v battery voltage using an ESP8266](https://www.engineersgarage.com/nodemcu-battery-voltage-monitor/)
+- [Tutorial for measuring 12v battery voltage using an ESP8266](https://www.engineersgarage.com/nodemcu-battery-voltage-monitor/) and https://www.youtube.com/watch?v=m5jasXwLQa4&ab_channel=HamedAdefuwa
+
+## TODO
+
+[] Try 47k resistor vs 27k to lower max voltage enough and work with this math
+[] Try 3.2v factor vs 5v factor since the board runs at 3.x volts
 
 ## Hardware
 
@@ -22,6 +27,8 @@ See [Fritzing](https://fritzing.org/) design in `/fritzing` directory.
 ![This is an image](fritzing/design_screenshot_20221008.jpg)
 
 ## Setup
+
+The following assumes OSX:
 
 1. Download and install the [Arduino IDE](https://www.arduino.cc/en/Main/Software)
 
